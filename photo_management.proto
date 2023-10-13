@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package photo_management;
+ option go_package = "photomanagementproto/";
+
+service PhotoService {
+    rpc UploadImage (ImageRequest) returns (ImageResponse);
+    rpc GetImageDetail (ImageDetailRequest) returns (ImageDetailResponse);
+    rpc GetImageFeed (ImageFeedRequest) returns (ImageFeedResponse);
+    rpc UpdateImageDetail (UpdateImageDetailRequest) returns (UpdateImageDetailResponse);
+}
+
+message ImageRequest {
+    string title = 1;
+    string content = 2;
+    bytes image_data = 3;
+}
+
+message ImageResponse {
+    int32 image_id = 1;
+    string result = 2;
+}
+
+message ImageDetailRequest {
+    int32 image_id = 1;
+}
+
+message ImageDetailResponse {
+    int32 image_id = 1;
+    string title = 2;
+    string content = 3;
+}
+
+message ImageFeedResponse {
+    repeated ImageDetailResponse images = 1;
+}
+
+message ImageFeedRequest{}
+
+message UpdateImageDetailRequest {
+    int32 image_id = 1;
+    string title = 2;
+    string content = 3;
+}
+
+message UpdateImageDetailResponse {
+    int32 image_id = 1;
+}
